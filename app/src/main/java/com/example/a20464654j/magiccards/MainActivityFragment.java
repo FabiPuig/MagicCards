@@ -1,8 +1,10 @@
 package com.example.a20464654j.magiccards;
 
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,6 +92,22 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void refresh(){
+        RefreshDataTask tasca = new RefreshDataTask();
+        tasca.execute();
+    }
 
+    //Control de les AsyncTask
+    private class RefreshDataTask extends AsyncTask<Void, Void, Void>{
+        // AsyncTask de segon plano
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            CridaApi api = new CridaApi();
+            String info = api.extrauCartes();
+
+            Log.d("DEBUG", info);
+
+            return null;
+        }
     }
 }
