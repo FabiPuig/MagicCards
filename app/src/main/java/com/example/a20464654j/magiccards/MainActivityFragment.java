@@ -103,9 +103,10 @@ public class MainActivityFragment extends Fragment {
         protected Void doInBackground(Void... params) {
 
             CridaApi api = new CridaApi();
-            String info = api.extrauCartes();
+            ArrayList<Carta> info = api.extrauCartes();
 
-            Log.d("DEBUG", info);
+            // Mostra el String info per el Logcat del Android Monitor
+            Log.d("DEBUG", info.toString());
 
             return null;
         }
