@@ -49,11 +49,9 @@ public class MainActivityFragment extends Fragment {
         //Creem un ListView que anira vinculat al list view del fragment_main
         ListView lvCartes = (ListView) view.findViewById(R.id.lvCards);
 
-        // ArrayList temporal per a provar el ListView del fragment_main
+        // ArrayList en el que estan les cartes que es mostraran al ListView del fragment_main
         alCartes = new ArrayList<>();
-        for( int i = 0; i < 1000; i++){
-            alCartes.add("elemento #" + i);
-        }
+
 
         // Adaptador per a incloure cada carta de l'ArrayList de les cartes al TextView del
         // lv_cartes_linea que anira dintre de cada posicio del ListView del fragment_main
@@ -97,18 +95,23 @@ public class MainActivityFragment extends Fragment {
     }
 
     //Control de les AsyncTask
-    private class RefreshDataTask extends AsyncTask<Void, Void, Void>{
+    private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Carta>>{
         // AsyncTask de segon plano
         @Override
-        protected Void doInBackground(Void... params) {
+        protected ArrayList<Carta> doInBackground(Void... params) {
 
             CridaApi api = new CridaApi();
             ArrayList<Carta> info = api.extrauCartes();
 
-            // Mostra el String info per el Logcat del Android Monitor
-            Log.d("DEBUG", info.toString());
+            return info;
+        }
 
-            return null;
+        @Override
+        protected void onPostExecute(ArrayList<Carta> cartas) {
+            adapter.clear();
+            for (Carta c: cartas) {
+                adapter.add( c.getNom());
+            }
         }
     }
 }
