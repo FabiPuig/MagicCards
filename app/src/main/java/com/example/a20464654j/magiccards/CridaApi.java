@@ -16,15 +16,32 @@ public class CridaApi {
     private final String url_base = "https://api.magicthegathering.io/v1/cards";
 
 
-    ArrayList<Carta> extrauCartes(){
+    ArrayList<Carta> extrauCartes(int quantitat){
 
         //Uri utilitzada per a filtrar les cridades a la api
         Uri creaUri = Uri.parse(url_base)
                 .buildUpon()
+                .appendQueryParameter("pageSize", String.valueOf(quantitat))
+
                 .build();
         String urlFinal = creaUri.toString();
 
         return crida(urlFinal);
+
+    }
+
+    ArrayList<Carta> cartesRarity(int quantitat, String rarity){
+
+        //Uri utilitzada per a filtrar les cridades a la api
+        Uri creaUri = Uri.parse(url_base)
+                .buildUpon()
+                .appendQueryParameter("pageSize", String.valueOf(quantitat))
+                .appendQueryParameter("rarity", rarity)
+                .build();
+        String urlFinal = creaUri.toString();
+
+        return crida(urlFinal);
+
 
     }
 

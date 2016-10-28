@@ -1,6 +1,8 @@
 package com.example.a20464654j.magiccards;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ public class MainActivityFragment extends Fragment {
     private ArrayList<String> alCartes;
 
     private ArrayAdapter<String> adapter;
+
+    private int quantitat = 100;
 
     public MainActivityFragment() {
     }
@@ -98,10 +102,15 @@ public class MainActivityFragment extends Fragment {
     private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Carta>>{
         // AsyncTask de segon plano
         @Override
-        protected ArrayList<Carta> doInBackground(Void... params) {
+        protected ArrayList<Carta> doInBackground(Void... voids) {
 
             CridaApi api = new CridaApi();
-            ArrayList<Carta> info = api.extrauCartes();
+
+            //Extreure cartes
+            ArrayList<Carta> info = api.extrauCartes(quantitat);
+
+            //Extreure cartes depenent de la rarity
+            //ArrayList<Carta> info = api.cartesRarity(quantitat, "Rare");
 
             return info;
         }
