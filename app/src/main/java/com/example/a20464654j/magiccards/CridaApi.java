@@ -45,6 +45,18 @@ public class CridaApi {
 
     }
 
+    ArrayList<Carta> cartesColor(int quantitat, String color){
+
+        Uri creaUri = Uri.parse(url_base)
+                .buildUpon()
+                .appendQueryParameter("pageSize", String.valueOf(quantitat) )
+                .appendQueryParameter("color", color)
+                .build();
+        String urlFinal = creaUri.toString();
+        
+        return crida(urlFinal);
+    }
+
 
     private ArrayList<Carta> crida(String url){
 

@@ -38,6 +38,25 @@
         <item>Basic Land</item>
     </string-array>
 
+    <!-- Titols a mostrar en el ListPreference Color del SettingsActivity -->
+    <string-array name="pref_color_titles">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Blanco</item>
+        <item>Azul</item>
+        <item>Negro</item>
+    </string-array>
+
+    <!-- Valors del ListPreference Color del SettingsActivity -->
+    <string-array name="pref_color_values">
+        <item>Red</item>
+        <item>Green</item>
+        <item>White</item>
+        <item>Blue</item>
+        <item>Black</item>
+    </string-array>
+
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
