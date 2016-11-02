@@ -50,10 +50,10 @@ public class CridaApi {
         Uri creaUri = Uri.parse(url_base)
                 .buildUpon()
                 .appendQueryParameter("pageSize", String.valueOf(quantitat) )
-                .appendQueryParameter("color", color)
+                .appendQueryParameter("colors", color)
                 .build();
         String urlFinal = creaUri.toString();
-        
+
         return crida(urlFinal);
     }
 

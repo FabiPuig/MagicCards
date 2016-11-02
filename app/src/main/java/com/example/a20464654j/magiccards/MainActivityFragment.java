@@ -107,10 +107,15 @@ public class MainActivityFragment extends Fragment {
             CridaApi api = new CridaApi();
 
             //Extreure cartes
-            ArrayList<Carta> info = api.extrauCartes(quantitat);
+            //ArrayList<Carta> info = api.extrauCartes(quantitat);
 
             //Extreure cartes depenent de la rarity
             //ArrayList<Carta> info = api.cartesRarity(quantitat, "Rare");
+
+            //Extreure cartes depenent del color
+            ArrayList<Carta> info = api.cartesColor(quantitat, "Red");
+
+            Log.d("DEBUG", info.toString());
 
             return info;
         }
