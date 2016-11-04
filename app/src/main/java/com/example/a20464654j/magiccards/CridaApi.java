@@ -1,6 +1,8 @@
 package com.example.a20464654j.magiccards;
 
 import android.net.Uri;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +91,7 @@ public class CridaApi {
                 Carta carta = new Carta();
                 carta.setNom( cartaJSON.getString("name"));
                 carta.setTipo( cartaJSON.getString("type"));
+                carta.setColor( cartaJSON.getString("colors"));;
                 carta.setRaresa( cartaJSON.getString("rarity"));
                 carta.setImatgeURL( cartaJSON.getString("imageUrl"));
 

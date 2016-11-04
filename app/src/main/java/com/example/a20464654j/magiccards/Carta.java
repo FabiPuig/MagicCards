@@ -7,6 +7,7 @@ package com.example.a20464654j.magiccards;
 public class Carta {
     private String nom;
     private String tipo;
+    private String color;
     private String raresa;
     private String imatgeURL;
 
@@ -25,6 +26,10 @@ public class Carta {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public String getColor() { return color; }
+
+    public void setColor(String color) { this.color = color; }
 
     public String getRaresa() {
         return raresa;

@@ -115,7 +115,7 @@ public class MainActivityFragment extends Fragment {
             //Extreure cartes depenent del color
             ArrayList<Carta> info = api.cartesColor(quantitat, "Red");
 
-            Log.d("DEBUG", info.toString());
+            //Log.d("DEBUG", info.toString());
 
             return info;
         }
@@ -124,7 +124,7 @@ public class MainActivityFragment extends Fragment {
         protected void onPostExecute(ArrayList<Carta> cartas) {
             adapter.clear();
             for (Carta c: cartas) {
-                adapter.add( c.getNom());
+                adapter.add( c.getNom() );
             }
         }
     }
