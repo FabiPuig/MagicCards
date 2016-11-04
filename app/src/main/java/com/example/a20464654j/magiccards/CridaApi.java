@@ -24,7 +24,6 @@ public class CridaApi {
         Uri creaUri = Uri.parse(url_base)
                 .buildUpon()
                 .appendQueryParameter("pageSize", String.valueOf(quantitat))
-
                 .build();
         String urlFinal = creaUri.toString();
 
@@ -57,6 +56,22 @@ public class CridaApi {
         String urlFinal = creaUri.toString();
 
         return crida(urlFinal);
+    }
+
+    ArrayList<Carta> cartesRarityColor(int quantitat, String rarity, String color){
+
+        Uri creaUri = Uri.parse(url_base)
+                .buildUpon()
+                .appendQueryParameter("pageSize", String.valueOf(quantitat) )
+                .appendQueryParameter("rarity", rarity)
+                .appendQueryParameter("colors", color)
+                .build();
+        String urlFinal = creaUri.toString();
+
+        Log.d("DEBUG", urlFinal);
+
+        return crida(urlFinal);
+
     }
 
 

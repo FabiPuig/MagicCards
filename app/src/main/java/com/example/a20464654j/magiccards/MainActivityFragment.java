@@ -113,9 +113,12 @@ public class MainActivityFragment extends Fragment {
             //ArrayList<Carta> info = api.cartesRarity(quantitat, "Rare");
 
             //Extreure cartes depenent del color
-            ArrayList<Carta> info = api.cartesColor(quantitat, "Red");
+            //ArrayList<Carta> info = api.cartesColor(quantitat, "Red");
 
-            //Log.d("DEBUG", info.toString());
+            //Extreure cartes depenent de la rarity i del color
+            ArrayList<Carta> info = api.cartesRarityColor(quantitat, "Rare", "Red");
+
+            Log.d("DEBUG", info.toString());
 
             return info;
         }
