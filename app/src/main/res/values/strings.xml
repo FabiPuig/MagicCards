@@ -20,6 +20,7 @@
 
     <!-- Titols a mostrar en el ListPreference Rareza del SettingsActivity-->
     <string-array name="pref_rarity_titles">
+        <item>Cualquiera</item>
         <item>Comun</item>
         <item>Poco comun</item>
         <item>Rara</item>
@@ -30,6 +31,7 @@
 
     <!-- Valors del ListPreference Rareza del SettingsActivity -->
     <string-array name="pref_rarity_values">
+        <item>All</item>
         <item>Common</item>
         <item>Uncommon</item>
         <item>Rare</item>
@@ -40,6 +42,7 @@
 
     <!-- Titols a mostrar en el ListPreference Color del SettingsActivity -->
     <string-array name="pref_color_titles">
+        <item>Cualquiera</item>
         <item>Rojo</item>
         <item>Verde</item>
         <item>Blanco</item>
@@ -49,6 +52,7 @@
 
     <!-- Valors del ListPreference Color del SettingsActivity -->
     <string-array name="pref_color_values">
+        <item>All</item>
         <item>Red</item>
         <item>Green</item>
         <item>White</item>

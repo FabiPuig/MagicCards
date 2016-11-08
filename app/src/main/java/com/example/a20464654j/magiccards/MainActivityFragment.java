@@ -62,7 +62,7 @@ public class MainActivityFragment extends Fragment {
         adapter = new ArrayAdapter<>(
                 getContext(),               //en aquest fragment
                 R.layout.lv_cartes_linea,   //layout on posara el TextView
-                R.id.tvLinea,               //TextView text view en el que metera el contenido
+                R.id.tvNom,               //TextView text view en el que metera el contenido
                 alCartes                    //contenido del ListView
         );
 

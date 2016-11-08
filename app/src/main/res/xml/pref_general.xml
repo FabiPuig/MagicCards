@@ -8,7 +8,7 @@
 
     <!-- ListPreference Rareza-->
     <ListPreference
-        android:defaultValue="Common"
+        android:defaultValue="All"
         android:entries="@array/pref_rarity_titles"
         android:entryValues="@array/pref_rarity_values"
         android:key="rarity"
@@ -18,7 +18,7 @@
 
     <!-- ListPreference Color-->
     <ListPreference
-        android:defaultValue="Red"
+        android:defaultValue="All"
         android:entries="@array/pref_color_titles"
         android:entryValues="@array/pref_color_values"
         android:key="color"
