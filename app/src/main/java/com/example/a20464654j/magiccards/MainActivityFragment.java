@@ -104,19 +104,23 @@ public class MainActivityFragment extends Fragment {
         @Override
         protected ArrayList<Carta> doInBackground(Void... voids) {
 
+            SharedPreferences preferencies = PreferenceManager.getDefaultSharedPreferences( getContext() );
+            String rarity = preferencies.getString("rarity", "All");
+            String color = preferencies.getString("color", "All");
+
             CridaApi api = new CridaApi();
 
-            //Extreure cartes
-            //ArrayList<Carta> info = api.extrauCartes(quantitat);
+            ArrayList<Carta> info = null;
 
-            //Extreure cartes depenent de la rarity
-            //ArrayList<Carta> info = api.cartesRarity(quantitat, "Rare");
-
-            //Extreure cartes depenent del color
-            //ArrayList<Carta> info = api.cartesColor(quantitat, "Red");
-
-            //Extreure cartes depenent de la rarity i del color
-            ArrayList<Carta> info = api.cartesRarityColor(quantitat, "Rare", "Red");
+            if( rarity.equals("All") && color.equals("All")){
+                info = api.extrauCartes(quantitat);
+            }else if( !rarity.equals("All") && color.equals("All")){
+                info = api.cartesRarity(quantitat, rarity);
+            }else if( rarity.equals("All") && !color.equals("All")){
+                info = api.cartesColor(quantitat, color);
+            }else {
+                info = api.cartesRarityColor(quantitat, rarity, color );
+            }
 
             Log.d("DEBUG", info.toString());
 

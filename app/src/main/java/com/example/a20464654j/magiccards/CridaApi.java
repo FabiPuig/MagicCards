@@ -106,9 +106,21 @@ public class CridaApi {
                 Carta carta = new Carta();
                 carta.setNom( cartaJSON.getString("name"));
                 carta.setTipo( cartaJSON.getString("type"));
-                carta.setColor( cartaJSON.getString("colors"));;
+
+                //Si la carta no te color li posa null
+                if( cartaJSON.has("colors") ){
+                    carta.setColor( cartaJSON.getString("colors"));
+                }else{
+                    carta.setColor( null );
+                }
                 carta.setRaresa( cartaJSON.getString("rarity"));
-                carta.setImatgeURL( cartaJSON.getString("imageUrl"));
+
+                //Si la carta no te la URL de la imatge la posa a null
+                if( cartaJSON.has( "imageUrl" ) ){
+                    carta.setImatgeURL( cartaJSON.getString("imageUrl"));
+                }else{
+                    carta.setImatgeURL( null );
+                }
 
                 cartes.add(carta);
 
