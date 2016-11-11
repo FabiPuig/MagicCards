@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,9 +23,9 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
 
     // ArrayList amb les cartes
-    private ArrayList<String> alCartes;
+    private ArrayList<Carta> alCartes;
 
-    private ArrayAdapter<String> adapter;
+    private CartaAdapter adapter;
 
     private int quantitat = 100;
 
@@ -57,12 +56,11 @@ public class MainActivityFragment extends Fragment {
         alCartes = new ArrayList<>();
 
 
-        // Adaptador per a incloure cada carta de l'ArrayList de les cartes al TextView del
+        // Adaptador per a incloure cada carta de l'ArrayList de les cartes als TextView del
         // lv_cartes_linea que anira dintre de cada posicio del ListView del fragment_main
-        adapter = new ArrayAdapter<>(
+        adapter = new CartaAdapter(
                 getContext(),               //en aquest fragment
                 R.layout.lv_cartes_linea,   //layout on posara el TextView
-                R.id.tvNom,               //TextView text view en el que metera el contenido
                 alCartes                    //contenido del ListView
         );
 
@@ -139,7 +137,7 @@ public class MainActivityFragment extends Fragment {
         protected void onPostExecute(ArrayList<Carta> cartas) {
             adapter.clear();
             for (Carta c: cartas) {
-                adapter.add( c.getNom() );
+                adapter.add( c );
             }
         }
     }

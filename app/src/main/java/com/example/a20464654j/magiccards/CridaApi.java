@@ -107,9 +107,13 @@ public class CridaApi {
                 carta.setNom( cartaJSON.getString("name"));
                 carta.setTipo( cartaJSON.getString("type"));
 
-                //Si la carta no te color li posa null
+                //Si la carta no te color li posa null. Si te colors els guarda tots
                 if( cartaJSON.has("colors") ){
-                    carta.setColor( cartaJSON.getString("colors"));
+                    String colores = "";
+                    for (int j = 0; j < cartaJSON.getJSONArray("colors").length(); j++) {
+                        colores = colores + cartaJSON.getJSONArray("colors").getString( j ) + " ";
+                    }
+                    carta.setColor( colores );
                 }else{
                     carta.setColor( null );
                 }
