@@ -93,6 +93,12 @@ public class MainActivityFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        refresh();
+    }
+
     public void refresh(){
         RefreshDataTask tasca = new RefreshDataTask();
         tasca.execute();
@@ -104,13 +110,15 @@ public class MainActivityFragment extends Fragment {
         @Override
         protected ArrayList<Carta> doInBackground(Void... voids) {
 
+            //Carrega les preferencies
             SharedPreferences preferencies = PreferenceManager.getDefaultSharedPreferences( getContext() );
+            //Guarda la rarity i el color de les preferencies
             String rarity = preferencies.getString("rarity", "All");
             String color = preferencies.getString("color", "All");
 
             CridaApi api = new CridaApi();
 
-            ArrayList<Carta> info = null;
+            ArrayList<Carta> info;
 
             if( rarity.equals("All") && color.equals("All")){
                 info = api.extrauCartes(quantitat);
