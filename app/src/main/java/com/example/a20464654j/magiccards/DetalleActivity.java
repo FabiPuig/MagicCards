@@ -25,7 +25,7 @@ public class DetalleActivity extends AppCompatActivity {
             }
         });
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
