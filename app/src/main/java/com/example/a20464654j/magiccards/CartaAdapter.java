@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class CartaAdapter extends ArrayAdapter<Carta> {
         tvNom.setText( carta.getNom() );
         tvRarity.setText( carta.getRaresa() );
         tvColor.setText( carta.getColor() );
+        Glide.with( getContext() ).load( carta.getImatgeURL() ).into( ivCarta );
 
 
         return convertView;

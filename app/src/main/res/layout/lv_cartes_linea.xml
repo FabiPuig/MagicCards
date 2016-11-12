@@ -64,7 +64,7 @@
         android:id="@+id/guideline4"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteX="0dp"
         app:layout_constraintGuide_percent="0.25520834" />
 
     <android.support.constraint.Guideline
@@ -73,7 +73,7 @@
         android:id="@+id/guideline5"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteX="0dp"
         app:layout_constraintGuide_percent="0.6302083" />
 
 </android.support.constraint.ConstraintLayout>
