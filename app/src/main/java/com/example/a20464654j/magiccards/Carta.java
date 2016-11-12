@@ -12,6 +12,7 @@ public class Carta implements Serializable{
     private String color;
     private String raresa;
     private String imatgeURL;
+    private String text;
 
     public String getNom() {
         return nom;
@@ -48,6 +49,10 @@ public class Carta implements Serializable{
     public void setImatgeURL(String imatgeURL) {
         this.imatgeURL = imatgeURL;
     }
+
+    public String getText() { return text; }
+
+    public void setText(String text) { this.text = text; }
 
     //per ara el toString() retornara nomes el nom
     @Override

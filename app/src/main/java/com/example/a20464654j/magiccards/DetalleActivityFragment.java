@@ -54,11 +54,13 @@ public class DetalleActivityFragment extends Fragment {
         tvType = (TextView) view.findViewById( R.id.tvType );
         tvRarity = (TextView) view.findViewById( R.id.tvRarity );
         tvColor = (TextView) view.findViewById( R.id.tvColor );
+        tvText = (TextView) view.findViewById( R.id.tvText );
 
         tvNom.setText( carta.getNom() );
         tvType.setText( carta.getTipo() );
         tvRarity.setText( carta.getRaresa() );
         tvColor.setText( carta.getColor() );
+        tvText.setText( carta.getText() );
         Glide.with( getContext() ).load( carta.getImatgeURL() ).into( ivCarta );
     }
 }

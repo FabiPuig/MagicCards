@@ -126,6 +126,8 @@ public class CridaApi {
                     carta.setImatgeURL( null );
                 }
 
+                carta.setText( cartaJSON.getString( "text" ));
+
                 cartes.add(carta);
 
             }
