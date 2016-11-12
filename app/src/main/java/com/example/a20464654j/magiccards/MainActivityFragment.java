@@ -1,5 +1,6 @@
 package com.example.a20464654j.magiccards;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -74,6 +75,17 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
+                // Agafem la carta del ListView
+                Carta carta = (Carta) adapterView.getItemAtPosition( position );
+
+                // Creem el intent que llançara l'Activity dels detalls ( DetalleActivity )
+                Intent intent = new Intent( getContext(), DetalleActivity.class);
+
+                // Fiquem la carta dintre de l'intent
+                intent.putExtra( "carta", carta);
+
+                // Llancem l'intent
+                startActivity( intent );
             }
         });
 
