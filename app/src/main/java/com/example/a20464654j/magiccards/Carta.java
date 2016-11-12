@@ -1,10 +1,12 @@
 package com.example.a20464654j.magiccards;
 
+import java.io.Serializable;
+
 /**
  * Created by Fabian on 20/10/2016.
  */
 
-public class Carta {
+public class Carta implements Serializable{
     private String nom;
     private String tipo;
     private String color;
