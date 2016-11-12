@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -66,6 +67,15 @@ public class MainActivityFragment extends Fragment {
 
         // Enllaça el contingut de l'adaptador al ListView ( en aquest cas al ListView fragment_main)
         lvCartes.setAdapter( adapter );
+
+        // Definim el OnItemClickListener que ens permetra obrir la DetalleActivity de la carta
+        // seleccionada del lv
+        lvCartes.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+        });
 
         return view;
     }
