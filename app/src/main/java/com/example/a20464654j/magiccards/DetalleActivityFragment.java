@@ -45,7 +45,7 @@ public class DetalleActivityFragment extends Fragment {
         Log.d("CARTA", carta.toString() );
 
         binding.tvNom.setText( carta.getNom() );
-        binding.tvType.setText( carta.getText() );
+        binding.tvType.setText( carta.getTipo() );
         binding.tvColor.setText( carta.getColor() );
         binding.tvRarity.setText( carta.getRaresa() );
         binding.tvText.setText( carta.getText() );

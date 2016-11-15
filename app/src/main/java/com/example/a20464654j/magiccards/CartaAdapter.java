@@ -1,6 +1,7 @@
 package com.example.a20464654j.magiccards;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.a20464654j.magiccards.databinding.LvCartesLineaBinding;
 
 import java.util.List;
 
@@ -30,24 +32,22 @@ public class CartaAdapter extends ArrayAdapter<Carta> {
 
         Carta carta = getItem( position);
 
+        LvCartesLineaBinding binding = null;
+
         if( convertView == null){
 
             LayoutInflater inflater = LayoutInflater.from( getContext() );
-            convertView = inflater.inflate( R.layout.lv_cartes_linea, parent, false);
-
+            binding = DataBindingUtil.inflate( inflater,  R.layout.lv_cartes_linea, parent, false);
+        }else{
+            binding = DataBindingUtil.getBinding( convertView );
         }
 
-        TextView tvNom = (TextView) convertView.findViewById( R.id.tvNom );
-        TextView tvRarity = (TextView) convertView.findViewById( R.id.tvRarity );
-        TextView tvColor = (TextView) convertView.findViewById( R.id.tvColor );
-        ImageView ivCarta = (ImageView) convertView.findViewById( R.id.ivCarta );
-
-        tvNom.setText( carta.getNom() );
-        tvRarity.setText( carta.getRaresa() );
-        tvColor.setText( carta.getColor() );
-        Glide.with( getContext() ).load( carta.getImatgeURL() ).into( ivCarta );
+        binding.tvNom.setText( carta.getNom() );
+        binding.tvRarity.setText( carta.getRaresa() );
+        binding.tvColor.setText( carta.getColor() );
+        Glide.with( getContext() ).load( carta.getImatgeURL() ).into( binding.ivCarta );
 
 
-        return convertView;
+        return binding.getRoot();
     }
 }
