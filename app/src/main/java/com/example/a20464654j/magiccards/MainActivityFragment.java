@@ -2,6 +2,7 @@ package com.example.a20464654j.magiccards;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -15,7 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
+
+import com.example.a20464654j.magiccards.databinding.FragmentMainBinding;
 
 import java.util.ArrayList;
 
@@ -49,10 +51,10 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        FragmentMainBinding binding = DataBindingUtil.inflate( inflater, R.layout.fragment_main,
+                container, false);
 
-        //Creem un ListView que anira vinculat al list view del fragment_main
-        ListView lvCartes = (ListView) view.findViewById(R.id.lvCards);
+        View view = binding.getRoot();
 
         // ArrayList en el que estan les cartes que es mostraran al ListView del fragment_main
         alCartes = new ArrayList<>();
@@ -66,12 +68,12 @@ public class MainActivityFragment extends Fragment {
                 alCartes                    //contenido del ListView
         );
 
-        // Enllaça el contingut de l'adaptador al ListView ( en aquest cas al ListView fragment_main)
-        lvCartes.setAdapter( adapter );
+
+        binding.lvCards.setAdapter( adapter );
 
         // Definim el OnItemClickListener que ens permetra obrir la DetalleActivity de la carta
         // seleccionada del lv
-        lvCartes.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+        binding.lvCards.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 

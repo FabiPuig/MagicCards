@@ -1,29 +1,23 @@
 package com.example.a20464654j.magiccards;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.a20464654j.magiccards.databinding.FragmentDetalleBinding;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class DetalleActivityFragment extends Fragment {
 
-    private View view;
-    private ImageView ivCarta;
-    private TextView tvNom;
-    private TextView tvType;
-    private TextView tvRarity;
-    private TextView tvColor;
-    private TextView tvText;
+    private FragmentDetalleBinding binding;
 
     public DetalleActivityFragment() {
     }
@@ -32,7 +26,8 @@ public class DetalleActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate( R.layout.fragment_detalle, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detalle, container, false);
+        View view = binding.getRoot();
 
         Intent i = getActivity().getIntent();
 
@@ -49,18 +44,12 @@ public class DetalleActivityFragment extends Fragment {
     private void updateUi(Carta carta){
         Log.d("CARTA", carta.toString() );
 
-        ivCarta = (ImageView) view.findViewById( R.id.ivCarta );
-        tvNom = (TextView) view.findViewById( R.id.tvNom );
-        tvType = (TextView) view.findViewById( R.id.tvType );
-        tvRarity = (TextView) view.findViewById( R.id.tvRarity );
-        tvColor = (TextView) view.findViewById( R.id.tvColor );
-        tvText = (TextView) view.findViewById( R.id.tvText );
+        binding.tvNom.setText( carta.getNom() );
+        binding.tvType.setText( carta.getText() );
+        binding.tvColor.setText( carta.getColor() );
+        binding.tvRarity.setText( carta.getRaresa() );
+        binding.tvText.setText( carta.getText() );
 
-        tvNom.setText( carta.getNom() );
-        tvType.setText( carta.getTipo() );
-        tvRarity.setText( carta.getRaresa() );
-        tvColor.setText( carta.getColor() );
-        tvText.setText( carta.getText() );
-        Glide.with( getContext() ).load( carta.getImatgeURL() ).into( ivCarta );
+        Glide.with( getContext() ).load( carta.getImatgeURL() ).into( binding.ivCarta );
     }
 }
