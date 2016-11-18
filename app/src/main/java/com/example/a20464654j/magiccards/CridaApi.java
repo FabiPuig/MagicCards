@@ -13,12 +13,12 @@ import java.util.ArrayList;
  * Created by Fabian on 20/10/2016.
  */
 
-public class CridaApi {
+class CridaApi {
 
-    private final String url_base = "https://api.magicthegathering.io/v1/cards";
+    private static final String url_base = "https://api.magicthegathering.io/v1/cards";
 
 
-    ArrayList<Carta> extrauCartes(int quantitat){
+    static ArrayList<Carta> extrauCartes( int quantitat ){
 
         //Uri utilitzada per a filtrar les cridades a la api
         Uri creaUri = Uri.parse(url_base)
@@ -31,7 +31,7 @@ public class CridaApi {
 
     }
 
-    ArrayList<Carta> cartesRarity(int quantitat, String rarity){
+    static ArrayList<Carta> cartesRarity( int quantitat, String rarity ){
 
         //Uri utilitzada per a filtrar les cridades a la api
         Uri creaUri = Uri.parse(url_base)
@@ -46,7 +46,7 @@ public class CridaApi {
 
     }
 
-    ArrayList<Carta> cartesColor(int quantitat, String color){
+    static ArrayList<Carta> cartesColor(int quantitat, String color){
 
         Uri creaUri = Uri.parse(url_base)
                 .buildUpon()
@@ -58,7 +58,7 @@ public class CridaApi {
         return crida(urlFinal);
     }
 
-    ArrayList<Carta> cartesRarityColor(int quantitat, String rarity, String color){
+    static ArrayList<Carta> cartesRarityColor(int quantitat, String rarity, String color){
 
         Uri creaUri = Uri.parse(url_base)
                 .buildUpon()
@@ -75,7 +75,7 @@ public class CridaApi {
     }
 
 
-    private ArrayList<Carta> crida(String url){
+    private static ArrayList<Carta> crida(String url){
 
         try{
 
@@ -91,7 +91,7 @@ public class CridaApi {
 
     }
 
-    private ArrayList<Carta> tractaJson(String infoJSON){
+    private static ArrayList<Carta> tractaJson(String infoJSON){
 
         ArrayList<Carta> cartes = new ArrayList<>();
 

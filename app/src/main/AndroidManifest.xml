@@ -32,7 +32,7 @@
             android:authorities="${applicationId}.provider"
             android:name=".CartaContentProvider"
             android:exported="false"/>
-        
+
     </application>
 
 </manifest>

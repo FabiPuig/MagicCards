@@ -138,18 +138,16 @@ public class MainActivityFragment extends Fragment {
             String rarity = preferencies.getString("rarity", "All");
             String color = preferencies.getString("color", "All");
 
-            CridaApi api = new CridaApi();
-
             ArrayList<Carta> info;
 
             if( rarity.equals("All") && color.equals("All")){
-                info = api.extrauCartes(quantitat);
+                info = CridaApi.extrauCartes(quantitat);
             }else if( !rarity.equals("All") && color.equals("All")){
-                info = api.cartesRarity(quantitat, rarity);
+                info = CridaApi.cartesRarity(quantitat, rarity);
             }else if( rarity.equals("All") && !color.equals("All")){
-                info = api.cartesColor(quantitat, color);
+                info = CridaApi.cartesColor(quantitat, color);
             }else {
-                info = api.cartesRarityColor(quantitat, rarity, color );
+                info = CridaApi.cartesRarityColor(quantitat, rarity, color );
             }
 
             Log.d("DEBUG", info.toString());
