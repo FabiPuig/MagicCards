@@ -3,6 +3,7 @@ package com.example.a20464654j.magiccards;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -20,6 +21,10 @@ import android.widget.AdapterView;
 import com.example.a20464654j.magiccards.databinding.FragmentMainBinding;
 
 import java.util.ArrayList;
+
+import nl.littlerobots.cupboard.tools.provider.UriHelper;
+
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -127,10 +132,10 @@ public class MainActivityFragment extends Fragment {
     }
 
     //Control de les AsyncTask
-    private class RefreshDataTask extends AsyncTask<Void, Void, ArrayList<Carta>>{
+    private class RefreshDataTask extends AsyncTask<Void, Void, Void>{
         // AsyncTask de segon plano
         @Override
-        protected ArrayList<Carta> doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
 
             //Carrega les preferencies
             SharedPreferences preferencies = PreferenceManager.getDefaultSharedPreferences( getContext() );
@@ -150,17 +155,15 @@ public class MainActivityFragment extends Fragment {
                 info = CridaApi.cartesRarityColor(quantitat, rarity, color );
             }
 
+            UriHelper uriHelper = UriHelper.with( CartaContentProvider.AUTHORITY);
+            Uri cartaUri = uriHelper.getUri( Carta.class );
+            cupboard().withContext( getContext() ).put(cartaUri, Carta.class, info );
+
+
             Log.d("DEBUG", info.toString());
 
-            return info;
+            return null;
         }
 
-        @Override
-        protected void onPostExecute(ArrayList<Carta> cartas) {
-            adapter.clear();
-            for (Carta c: cartas) {
-                adapter.add( c );
-            }
-        }
     }
 }
