@@ -151,6 +151,7 @@ public class MainActivityFragment extends Fragment {
                 info = CridaApi.cartesRarityColor(quantitat, rarity, color );
             }
 
+            DataManager.borraCartes( getContext() );
             DataManager.guardaCartes( info, getContext() );
 
             Log.d("DEBUG", info.toString());
