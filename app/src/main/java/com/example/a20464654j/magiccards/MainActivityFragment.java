@@ -2,12 +2,16 @@ package com.example.a20464654j.magiccards;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,12 +29,9 @@ import java.util.ArrayList;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    // ArrayList amb les cartes
-    private ArrayList<Carta> alCartes;
-
-    private CartaAdapter adapter;
+    private CartaCursorAdapter adapter;
 
     private int quantitat = 100;
 
@@ -57,17 +58,7 @@ public class MainActivityFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        // ArrayList en el que estan les cartes que es mostraran al ListView del fragment_main
-        alCartes = new ArrayList<>();
-
-
-        // Adaptador per a incloure cada carta de l'ArrayList de les cartes als TextView del
-        // lv_cartes_linea que anira dintre de cada posicio del ListView del fragment_main
-        adapter = new CartaAdapter(
-                getContext(),               //en aquest fragment
-                R.layout.lv_cartes_linea,   //layout on posara el TextView
-                alCartes                    //contenido del ListView
-        );
+        adapter = new CartaCursorAdapter( getContext(), Carta.class);
 
 
         binding.lvCards.setAdapter( adapter );
@@ -91,6 +82,8 @@ public class MainActivityFragment extends Fragment {
                 startActivity( intent );
             }
         });
+
+        getLoaderManager().initLoader( 0, null, this);
 
         return view;
     }
@@ -125,6 +118,21 @@ public class MainActivityFragment extends Fragment {
     public void refresh(){
         RefreshDataTask tasca = new RefreshDataTask();
         tasca.execute();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return DataManager.getCursorLoader( getContext() );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        adapter.swapCursor( data );
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        adapter.swapCursor( null );
     }
 
     //Control de les AsyncTask

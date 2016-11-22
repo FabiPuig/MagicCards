@@ -1,7 +1,9 @@
 package com.example.a20464654j.magiccards;
 
 import android.content.Context;
+
 import android.net.Uri;
+import android.support.v4.content.CursorLoader;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,10 @@ public class DataManager {
     }
 
     static void borraCartes( Context context){
-        cupboard().withContext( context ).delete( CARD_URI, "_id > ?",  "1");
+        cupboard().withContext( context ).delete( CARD_URI, "_id > ?",  "0");
+    }
+
+    static CursorLoader getCursorLoader(Context context){
+        return  new CursorLoader( context, CARD_URI, null, null, null, null);
     }
 }
