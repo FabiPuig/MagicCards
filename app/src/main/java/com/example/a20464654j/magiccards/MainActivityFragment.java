@@ -1,5 +1,6 @@
 package com.example.a20464654j.magiccards;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -33,6 +34,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     private CartaCursorAdapter adapter;
 
+    private ProgressDialog progressDialog;
+
     private int quantitat = 100;
 
     public MainActivityFragment() {
@@ -60,6 +63,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
         adapter = new CartaCursorAdapter( getContext(), Carta.class);
 
+        progressDialog = new ProgressDialog( getContext() );
+        progressDialog.setMessage("Cargando...");
 
         binding.lvCards.setAdapter( adapter );
 
@@ -112,7 +117,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onStart() {
         super.onStart();
-        refresh();
     }
 
     public void refresh(){
@@ -137,6 +141,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     //Control de les AsyncTask
     private class RefreshDataTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.show();
+        }
+
         // AsyncTask de segon plano
         @Override
         protected Void doInBackground(Void... voids) {
@@ -167,5 +179,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            progressDialog.dismiss();
+        }
     }
 }
