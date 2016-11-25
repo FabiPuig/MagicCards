@@ -16,80 +16,53 @@ import java.util.ArrayList;
 class CridaApi {
 
     private static final String url_base = "https://api.magicthegathering.io/v1/cards";
+    private static final int maxPag = 321;
+    private static final int quantCartes = 100;
 
 
-    static ArrayList<Carta> extrauCartes( int quantitat ){
-
-        //Uri utilitzada per a filtrar les cridades a la api
-        Uri creaUri = Uri.parse(url_base)
-                .buildUpon()
-                .appendQueryParameter("pageSize", String.valueOf(quantitat))
-                .build();
-        String urlFinal = creaUri.toString();
-
-        return crida(urlFinal);
-
-    }
-
-    static ArrayList<Carta> cartesRarity( int quantitat, String rarity ){
-
-        //Uri utilitzada per a filtrar les cridades a la api
-        Uri creaUri = Uri.parse(url_base)
-                .buildUpon()
-                .appendQueryParameter("pageSize", String.valueOf(quantitat))
-                .appendQueryParameter("rarity", rarity)
-                .build();
-        String urlFinal = creaUri.toString();
-
-        return crida(urlFinal);
+    static ArrayList<Carta> extrauCartes( ){
 
 
-    }
-
-    static ArrayList<Carta> cartesColor(int quantitat, String color){
-
-        Uri creaUri = Uri.parse(url_base)
-                .buildUpon()
-                .appendQueryParameter("pageSize", String.valueOf(quantitat) )
-                .appendQueryParameter("colors", color)
-                .build();
-        String urlFinal = creaUri.toString();
-
-        return crida(urlFinal);
-    }
-
-    static ArrayList<Carta> cartesRarityColor(int quantitat, String rarity, String color){
-
-        Uri creaUri = Uri.parse(url_base)
-                .buildUpon()
-                .appendQueryParameter("pageSize", String.valueOf(quantitat) )
-                .appendQueryParameter("rarity", rarity)
-                .appendQueryParameter("colors", color)
-                .build();
-        String urlFinal = creaUri.toString();
-
-        Log.d("DEBUG", urlFinal);
-
-        return crida(urlFinal);
-
-    }
+        ArrayList<Carta> cartes = new ArrayList<>();
 
 
-    private static ArrayList<Carta> crida(String url){
+        for (int i = 1; i <= 10; i++) {
 
-        try{
+            //per al maxim de pagines treure comentari d'aquest fori i borrar el de dalt
+            //for (int i = 1; i <= maxPag; i++) {
 
-            String respostaJson = HttpUtils.get(url);
-            return tractaJson(respostaJson);
+                try{
+                    String url = extrauUrl( i );
+                    String respostaJson = HttpUtils.get(url);
+                    Log.d("DEBBUG", respostaJson);
 
-        } catch (IOException e) {
+                    ArrayList<Carta> info = tractaJson( respostaJson );
+                    cartes.addAll( info );
 
-            e.printStackTrace();
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+            //}
         }
 
-        return null;
+
+        return cartes;
 
     }
+
+    private static String extrauUrl(int pagina){
+
+        Uri creaUri = Uri.parse(url_base)
+                .buildUpon()
+                .appendQueryParameter("page", String.valueOf( pagina ) )
+                .appendQueryParameter("pageSize", String.valueOf( quantCartes ) )
+                .build();
+
+        return creaUri.toString();
+
+    }
+
 
     private static ArrayList<Carta> tractaJson(String infoJSON){
 
@@ -126,7 +99,11 @@ class CridaApi {
                     carta.setImatgeURL( null );
                 }
 
-                carta.setText( cartaJSON.getString( "text" ));
+                if( cartaJSON.has("text" ) ){
+                    carta.setText( cartaJSON.getString( "text" ));
+                }else{
+                    carta.setText( null );
+                }
 
                 cartes.add(carta);
 

@@ -2,11 +2,9 @@ package com.example.a20464654j.magiccards;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -35,8 +33,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private CartaCursorAdapter adapter;
 
     private ProgressDialog progressDialog;
-
-    private int quantitat = 100;
 
     public MainActivityFragment() {
     }
@@ -153,23 +149,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         @Override
         protected Void doInBackground(Void... voids) {
 
+            //Per ara no utilitzarem aquests camps
             //Carrega les preferencies
-            SharedPreferences preferencies = PreferenceManager.getDefaultSharedPreferences( getContext() );
+            //SharedPreferences preferencies = PreferenceManager.getDefaultSharedPreferences( getContext() );
             //Guarda la rarity i el color de les preferencies
-            String rarity = preferencies.getString("rarity", "All");
-            String color = preferencies.getString("color", "All");
+            //String rarity = preferencies.getString("rarity", "All");
+            //String color = preferencies.getString("color", "All");
 
-            ArrayList<Carta> info;
-
-            if( rarity.equals("All") && color.equals("All")){
-                info = CridaApi.extrauCartes(quantitat);
-            }else if( !rarity.equals("All") && color.equals("All")){
-                info = CridaApi.cartesRarity(quantitat, rarity);
-            }else if( rarity.equals("All") && !color.equals("All")){
-                info = CridaApi.cartesColor(quantitat, color);
-            }else {
-                info = CridaApi.cartesRarityColor(quantitat, rarity, color );
-            }
+            ArrayList<Carta> info = CridaApi.extrauCartes( );
 
             DataManager.borraCartes( getContext() );
             DataManager.guardaCartes( info, getContext() );
