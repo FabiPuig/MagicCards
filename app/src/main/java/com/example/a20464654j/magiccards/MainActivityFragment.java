@@ -73,20 +73,28 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 // Agafem la carta del ListView
                 Carta carta = (Carta) adapterView.getItemAtPosition( position );
 
-                // Creem el intent que llançara l'Activity dels detalls ( DetalleActivity )
-                Intent intent = new Intent( getContext(), DetalleActivity.class);
+                //Si no es tablet mostrara l'Activiti de detalls
+                if( !esTablet() ){
+                    // Creem el intent que llançara l'Activity dels detalls ( DetalleActivity )
+                    Intent intent = new Intent( getContext(), DetalleActivity.class);
 
-                // Fiquem la carta dintre de l'intent
-                intent.putExtra( "carta", carta);
+                    // Fiquem la carta dintre de l'intent
+                    intent.putExtra( "carta", carta);
 
-                // Llancem l'intent
-                startActivity( intent );
+                    // Llancem l'intent
+                    startActivity( intent );
+                }
+
             }
         });
 
         getLoaderManager().initLoader( 0, null, this);
 
         return view;
+    }
+
+    boolean esTablet(){
+        return getResources().getBoolean( R.bool.tablet );
     }
 
     @Override
