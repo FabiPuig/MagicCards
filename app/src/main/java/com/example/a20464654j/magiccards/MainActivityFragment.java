@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.alexvasilkov.events.Events;
 import com.example.a20464654j.magiccards.databinding.FragmentMainBinding;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 // Agafem la carta del ListView
                 Carta carta = (Carta) adapterView.getItemAtPosition( position );
 
-                //Si no es tablet mostrara l'Activiti de detalls
+                //Si no es tablet mostrara l'Activity de detalls
                 if( !esTablet() ){
                     // Creem el intent que llançara l'Activity dels detalls ( DetalleActivity )
                     Intent intent = new Intent( getContext(), DetalleActivity.class);
@@ -83,6 +84,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
                     // Llancem l'intent
                     startActivity( intent );
+                }else{
+                    Events.create("detail-card").param(carta).post();
                 }
 
             }
