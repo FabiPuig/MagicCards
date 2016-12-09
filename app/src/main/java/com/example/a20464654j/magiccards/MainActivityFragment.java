@@ -4,14 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
-import android.os.AsyncTask;
+
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +21,6 @@ import android.widget.AdapterView;
 
 import com.alexvasilkov.events.Events;
 import com.example.a20464654j.magiccards.databinding.FragmentMainBinding;
-
-import java.util.ArrayList;
 
 
 /**
@@ -124,10 +121,13 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public void onStart() {
         super.onStart();
+
+        // Activa els Events a l'Activity
+        Events.register( this );
     }
 
     public void refresh(){
-        RefreshDataTask tasca = new RefreshDataTask();
+        RefreshDataTask tasca = new RefreshDataTask( getActivity().getApplicationContext());
         tasca.execute();
     }
 
@@ -146,7 +146,20 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         adapter.swapCursor( null );
     }
 
-    //Control de les AsyncTask
+
+    @Events.Subscribe("inici-cargando")
+    void preRefresh(){
+        progressDialog.show();
+    }
+
+    @Events.Subscribe("fin-cargando")
+    void postRefresh(){
+        progressDialog.dismiss();
+    }
+
+
+    /*
+    Control de les AsyncTask
     private class RefreshDataTask extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -184,4 +197,5 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             progressDialog.dismiss();
         }
     }
+    * */
 }

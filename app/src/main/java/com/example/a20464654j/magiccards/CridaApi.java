@@ -34,7 +34,6 @@ class CridaApi {
                 try{
                     String url = extrauUrl( i );
                     String respostaJson = HttpUtils.get(url);
-                    Log.d("DEBBUG", respostaJson);
 
                     ArrayList<Carta> info = tractaJson( respostaJson );
                     cartes.addAll( info );

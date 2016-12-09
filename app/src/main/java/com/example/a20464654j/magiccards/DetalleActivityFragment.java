@@ -27,6 +27,7 @@ public class DetalleActivityFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        // Activa els Events a l'Activity
         Events.register(this);
     }
 
@@ -55,7 +56,6 @@ public class DetalleActivityFragment extends Fragment {
     }
 
     private void updateUi(Carta carta){
-        Log.d("CARTA", carta.toString() );
 
         binding.tvNom.setText( carta.getNom() );
         binding.tvType.setText( carta.getTipo() );
