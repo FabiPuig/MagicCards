@@ -122,6 +122,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     public void onStart() {
         super.onStart();
 
+        getLoaderManager().restartLoader( 0, null, this);
         // Activa els Events a l'Activity
         Events.register( this );
     }

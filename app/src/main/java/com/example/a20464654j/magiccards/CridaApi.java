@@ -26,10 +26,10 @@ class CridaApi {
         ArrayList<Carta> cartes = new ArrayList<>();
 
 
-        for (int i = 1; i <= 10; i++) {
-
-            //per al maxim de pagines treure comentari d'aquest fori i borrar el de dalt
-            //for (int i = 1; i <= maxPag; i++) {
+        for (int i = 1; i <= 50; i++) {
+        //per al maxim de pagines treure comentari del fori de baix i borrar/comentar el de dalt
+        // en les 50 primeres cartes no hi ha cap carta Mythic Rare
+        //for (int i = 1; i <= maxPag; i++) {
 
                 try{
                     String url = extrauUrl( i );
@@ -42,7 +42,7 @@ class CridaApi {
 
                     e.printStackTrace();
                 }
-            //}
+
         }
 
 
